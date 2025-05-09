@@ -22,14 +22,14 @@ export const Navbar = () => {
                                         funroad
                                 </span>
                         </Link>
-                        <div className="items-center gap-4 hidden lg:flex">
+                        <div className="items-center gap-4 hidden xl:flex">
                                 {navbarItems.map((item) => (
                                         <NavbarItem key={item.href} href={item.href} isActive={item.href === pathname}>
                                                 {item.children}
                                         </NavbarItem>
                                 ))}
                         </div>
-                        <div className="hidden lg:flex">
+                        <div className="hidden xl:flex">
                                 <Button
                                         asChild
                                         variant={'secondary'}
@@ -46,7 +46,7 @@ export const Navbar = () => {
                         </div>
                         <NavbarSidebar items={navbarItems} open={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
 
-                        <div className="flex lg:hidden items-center justify-center">
+                        <div className="flex xl:hidden items-center justify-center">
                                 <Button
                                         onClick={() => setIsSidebarOpen(true)}
                                         variant={'ghost'}
