@@ -16,7 +16,7 @@ interface Props {
 export const NavbarSidebar = ({ items, open, onOpenChange }: Props) => {
         return (
                 <Sheet open={open} onOpenChange={onOpenChange}>
-                        <SheetContent side="left" className="p-0 transition-none">
+                        <SheetContent side="left" className="p-0 slide-in-from-left">
                                 <SheetHeader className="p-4 border-b">
                                         <div className="flex items-center">
                                                 <SheetTitle>Menu</SheetTitle>
