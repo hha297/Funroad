@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import { CustomCategory } from '../type';
+
+import { CategoriesGetManyOutput } from '@/modules/categories/type';
 
 interface SubcategoryMenuProps {
-        category: CustomCategory;
+        category: CategoriesGetManyOutput[1];
         isOpen: boolean;
         position: {
                 top: number;
