@@ -1,12 +1,12 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Poppins } from 'next/font/google';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 import { NavbarSidebar } from './navbar-sidebar';
 import { MenuIcon } from 'lucide-react';
+import { Poppins } from 'next/font/google';
 
 const poppins = Poppins({
         weight: ['400', '500', '600', '700', '800', '900'],
@@ -35,13 +35,17 @@ export const Navbar = () => {
                                         variant={'secondary'}
                                         className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-pink-400 transition-colors text-lg"
                                 >
-                                        <Link href={'/sign-in'}>Sign In</Link>
+                                        <Link prefetch href={'/sign-in'}>
+                                                Sign In
+                                        </Link>
                                 </Button>
                                 <Button
                                         asChild
                                         className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 hover:text-black transition-colors text-lg"
                                 >
-                                        <Link href={'sign-up'}>Start Selling</Link>
+                                        <Link prefetch href={'sign-up'}>
+                                                Start Selling
+                                        </Link>
                                 </Button>
                         </div>
                         <NavbarSidebar items={navbarItems} open={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
