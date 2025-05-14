@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 import { NavbarSidebar } from './navbar-sidebar';
 import { MenuIcon } from 'lucide-react';
 import { Poppins } from 'next/font/google';
+import { useQuery } from '@tanstack/react-query';
+import { useTRPC } from '@/trpc/client';
 
 const poppins = Poppins({
         weight: ['400', '500', '600', '700', '800', '900'],
@@ -14,6 +16,8 @@ const poppins = Poppins({
 });
 export const Navbar = () => {
         const pathname = usePathname();
+        const trpc = useTRPC();
+        const session = useQuery(trpc.auth.session.queryOptions());
         const [isSidebarOpen, setIsSidebarOpen] = useState(false);
         return (
                 <nav className="h-20 flex border-b justify-between font-medium bg-white">
@@ -29,25 +33,39 @@ export const Navbar = () => {
                                         </NavbarItem>
                                 ))}
                         </div>
-                        <div className="hidden xl:flex">
-                                <Button
-                                        asChild
-                                        variant={'secondary'}
-                                        className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-pink-400 transition-colors text-lg"
-                                >
-                                        <Link prefetch href={'/sign-in'}>
-                                                Sign In
-                                        </Link>
-                                </Button>
-                                <Button
-                                        asChild
-                                        className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 hover:text-black transition-colors text-lg"
-                                >
-                                        <Link prefetch href={'sign-up'}>
-                                                Start Selling
-                                        </Link>
-                                </Button>
-                        </div>
+                        {session.data?.user ? (
+                                <div className="hidden xl:flex">
+                                        <Button
+                                                asChild
+                                                variant={'secondary'}
+                                                className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 transition-colors text-lg"
+                                        >
+                                                <Link prefetch href={'/dashboard'}>
+                                                        Dashboard
+                                                </Link>
+                                        </Button>
+                                </div>
+                        ) : (
+                                <div className="hidden xl:flex">
+                                        <Button
+                                                asChild
+                                                variant={'secondary'}
+                                                className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-pink-400 transition-colors text-lg"
+                                        >
+                                                <Link prefetch href={'/sign-in'}>
+                                                        Sign In
+                                                </Link>
+                                        </Button>
+                                        <Button
+                                                asChild
+                                                className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 hover:text-black transition-colors text-lg"
+                                        >
+                                                <Link prefetch href={'sign-up'}>
+                                                        Start Selling
+                                                </Link>
+                                        </Button>
+                                </div>
+                        )}
                         <NavbarSidebar items={navbarItems} open={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
 
                         <div className="flex xl:hidden items-center justify-center">
