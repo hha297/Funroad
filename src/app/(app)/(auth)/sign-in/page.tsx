@@ -6,7 +6,7 @@ import React from 'react';
 const SignInPage = async () => {
         const session = await caller.auth.session();
 
-        if (session) {
+        if (session?.user) {
                 redirect('/');
         }
         return <SignInView />;

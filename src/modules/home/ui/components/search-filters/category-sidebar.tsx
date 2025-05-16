@@ -31,10 +31,10 @@ export const CategorySidebar = ({ open, onOpenChange }: Props) => {
         const handleCategoryClick = (category: CategoriesGetManyOutput[1]) => () => {
                 if (category.subcategories && category.subcategories.length > 0) {
                         setParentCategories(category.subcategories as unknown as CategoriesGetManyOutput);
-                        setSelectedCategory(null);
+                        setSelectedCategory(category);
                 } else {
                         if (parentCategories && selectedCategory) {
-                                // This is a subcategory, so we need to navigate to the subcategory
+                                // This is a subcategory, so we need to navigate to the /category/subcategory
                                 router.push(`/${selectedCategory.slug}/${category.slug}`);
                         } else {
                                 // This is a root category, so we need to navigate to the category
