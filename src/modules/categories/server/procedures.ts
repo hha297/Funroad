@@ -21,7 +21,6 @@ export const categoriesRouter = createTRPCRouter({
                         subcategories: (doc.subcategories?.docs ?? []).map((doc) => ({
                                 // Because subcategories is a nested collection, It's needed to use the same method to get the data
                                 ...(doc as Category),
-                                subcategories: undefined,
                         })),
                 }));
                 return formattedData;
