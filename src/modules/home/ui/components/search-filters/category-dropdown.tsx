@@ -4,13 +4,14 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 import { useRef, useState } from 'react';
-import { useDropdownPosition } from './use-dropdown-position';
+
 import { SubcategoryMenu } from './subcategory-menu';
-import { CustomCategory } from '../type';
+
 import Link from 'next/link';
+import { CategoriesGetManyOutput } from '@/modules/categories/type';
 
 interface CategoryDropdownProps {
-        category: CustomCategory;
+        category: CategoriesGetManyOutput[1];
         isActive?: boolean;
         isNavigationHovered?: boolean;
 }
@@ -18,8 +19,7 @@ interface CategoryDropdownProps {
 export const CategoryDropdown = ({ category, isActive, isNavigationHovered }: CategoryDropdownProps) => {
         const [isOpen, setIsOpen] = useState(false);
         const dropdownRef = useRef<HTMLDivElement>(null);
-        const { getDropwdownPosition } = useDropdownPosition(dropdownRef);
-        const dropwdownPosition = getDropwdownPosition();
+
         const onMouseEnter = () => {
                 if (category.subcategories) {
                         setIsOpen(true);
@@ -55,7 +55,7 @@ export const CategoryDropdown = ({ category, isActive, isNavigationHovered }: Ca
                                         />
                                 )}
                         </div>
-                        <SubcategoryMenu category={category} isOpen={isOpen} position={dropwdownPosition} />
+                        <SubcategoryMenu category={category} isOpen={isOpen} />
                 </div>
         );
 };

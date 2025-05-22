@@ -64,15 +64,15 @@ export const productsRouter = createTRPCRouter({
                                                 subcategories: undefined,
                                         })),
                                 }));
-                                const subCategories = [];
+                                const subCategoriesSlugs = [];
                                 const parentCategory = formattedData[0];
                                 if (parentCategory) {
-                                        subCategories.push(
+                                        subCategoriesSlugs.push(
                                                 ...parentCategory.subcategories.map((subcategory) => subcategory.slug),
                                         );
 
                                         where['category.slug'] = {
-                                                in: [parentCategory.slug, ...subCategories],
+                                                in: [parentCategory.slug, ...subCategoriesSlugs],
                                         };
                                 }
                         }
