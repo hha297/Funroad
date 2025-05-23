@@ -27,7 +27,7 @@ export const authRouter = createTRPCRouter({
                         },
                 });
 
-                if (existingUser) {
+                if (existingUser.docs.length > 0) {
                         throw new TRPCError({
                                 code: 'BAD_REQUEST',
                                 message: 'Username already exists',
