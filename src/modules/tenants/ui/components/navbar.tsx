@@ -3,8 +3,23 @@
 import { useTRPC } from '@/trpc/client';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { generateTenantUrl } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { ShoppingCartIcon } from 'lucide-react';
+
+const CheckoutButton = dynamic(
+        () => import('@/modules/checkout/ui/components/checkout-button').then((mod) => mod.CheckoutButton),
+        {
+                ssr: false,
+                loading: () => (
+                        <Button className=" bg-white" disabled>
+                                <ShoppingCartIcon />
+                        </Button>
+                ),
+        },
+);
 
 interface NavbarProps {
         slug: string;
@@ -35,6 +50,7 @@ export const Navbar = ({ slug }: NavbarProps) => {
                                         )}
                                         <p className="text-xl">{data.name}</p>
                                 </Link>
+                                <CheckoutButton tenantSlug={slug} />
                         </div>
                 </nav>
         );
