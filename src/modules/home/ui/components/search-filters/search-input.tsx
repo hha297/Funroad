@@ -34,7 +34,7 @@ export const SearchInput = ({ disable }: Props) => {
                         </Button>
                         {session.data?.user && (
                                 <Button asChild variant={'elevated'} onClick={() => setIsSidebarOpen(true)}>
-                                        <Link href={'/library'}>
+                                        <Link href={'/library'} prefetch>
                                                 <BookmarkCheckIcon />
                                                 Library
                                         </Link>

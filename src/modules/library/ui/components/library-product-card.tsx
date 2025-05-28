@@ -1,10 +1,8 @@
-import { formatCurrency, generateTenantUrl } from '@/lib/utils';
 import { StarIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
-interface ProductCardProps {
+interface LibraryProductCardProps {
         id: string;
         name: string;
         imageUrl?: string | null;
@@ -12,10 +10,9 @@ interface ProductCardProps {
         tenantImageUrl?: string | null;
         reviewRating: number;
         reviewCount: number;
-        price: number;
 }
 
-export const ProductCard = ({
+export const LibraryProductCard = ({
         id,
         name,
         imageUrl,
@@ -23,16 +20,9 @@ export const ProductCard = ({
         tenantImageUrl,
         reviewRating,
         reviewCount,
-        price,
-}: ProductCardProps) => {
-        const router = useRouter();
-        const handleUserClick = (e: React.MouseEvent<HTMLDivElement>) => {
-                e.stopPropagation();
-                e.preventDefault();
-                router.push(generateTenantUrl(tenantSlug));
-        };
+}: LibraryProductCardProps) => {
         return (
-                <Link href={`${generateTenantUrl(tenantSlug)}/products/${id}`}>
+                <Link href={`/library/${id}`}>
                         <div className="border rounded-md bg-white overflow-hidden h-full flex flex-col hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-shadow">
                                 <div className="relative aspect-square">
                                         <Image
@@ -45,7 +35,7 @@ export const ProductCard = ({
                                 <div className="p-4 border-y flex flex-col flex-1 gap-3">
                                         <h3 className="text-lg font-medium line-clamp-4">{name}</h3>
 
-                                        <div className="flex items-center gap-2" onClick={handleUserClick}>
+                                        <div className="flex items-center gap-2">
                                                 {tenantImageUrl ? (
                                                         <Image
                                                                 src={tenantImageUrl}
@@ -75,16 +65,11 @@ export const ProductCard = ({
                                                 </div>
                                         )}
                                 </div>
-                                <div className="p-4">
-                                        <div className="relative px-2 py-1 border bg-pink-400 w-fit">
-                                                <p className="text-sm font-medium">{formatCurrency(price)}</p>
-                                        </div>
-                                </div>
                         </div>
                 </Link>
         );
 };
 
-export const ProductCardSkeleton = () => {
+export const LibraryProductCardSkeleton = () => {
         return <div className="w-full aspect-3/4 bg-neutral-200 rounded-lg animate-pulse" />;
 };

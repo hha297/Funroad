@@ -13,7 +13,7 @@ import { Categories } from './collections/Categories';
 import { Products } from './collections/Products';
 import { Tags } from './collections/Tags';
 import { Tenants } from './collections/Tenants';
-import { Orders } from './collections/Order';
+import { Orders } from './collections/Orders';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);

@@ -251,7 +251,7 @@ export interface Order {
   id: string;
   name: string;
   user: string | User;
-  products: string | Product;
+  product: string | Product;
   stripeCheckoutSessionId: string;
   updatedAt: string;
   createdAt: string;
@@ -433,7 +433,7 @@ export interface TenantsSelect<T extends boolean = true> {
 export interface OrdersSelect<T extends boolean = true> {
   name?: T;
   user?: T;
-  products?: T;
+  product?: T;
   stripeCheckoutSessionId?: T;
   updatedAt?: T;
   createdAt?: T;
