@@ -33,7 +33,7 @@ export const SearchInput = ({ disable }: Props) => {
                                 <ListFilterIcon />
                         </Button>
                         {session.data?.user && (
-                                <Button asChild variant={'elevated'} onClick={() => setIsSidebarOpen(true)}>
+                                <Button asChild variant={'elevated'}>
                                         <Link href={'/library'} prefetch>
                                                 <BookmarkCheckIcon />
                                                 Library
