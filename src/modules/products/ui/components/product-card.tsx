@@ -66,12 +66,17 @@ export const ProductCard = ({
                                                 <p className="text-sm hover:underline font-medium">{tenantSlug}</p>
                                         </div>
 
-                                        {reviewCount > 0 && (
+                                        {reviewCount > 0 ? (
                                                 <div className="flex items-center gap-2">
                                                         <StarIcon className="size-4 fill-black" />
                                                         <p className="text-sm font-medium">
                                                                 {reviewRating.toFixed(1)} ({reviewCount})
                                                         </p>
+                                                </div>
+                                        ) : (
+                                                <div className="flex items-center gap-2">
+                                                        <StarIcon className="size-4 " />
+                                                        <p className="text-sm font-medium">No reviews</p>
                                                 </div>
                                         )}
                                 </div>
