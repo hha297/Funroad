@@ -34,7 +34,14 @@ export const LibraryProductView = ({ productId }: LibraryProductViewProps) => {
                                                 </div>
                                         </div>
                                         <div className="lg:col-span-5">
-                                                <p>No special</p>
+                                                {data.content ? (
+                                                        <p>{data.content}</p>
+                                                ) : (
+                                                        <p className="font-medium italic text-muted-foreground">
+                                                                {' '}
+                                                                No special
+                                                        </p>
+                                                )}
                                         </div>
                                 </div>
                         </section>
