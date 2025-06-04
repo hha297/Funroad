@@ -1,5 +1,6 @@
 import { isSuperAdmin } from '@/lib/access';
 import { Tenant } from '@/payload-types';
+import { lexicalEditor, UploadFeature } from '@payloadcms/richtext-lexical';
 import { CollectionConfig } from 'payload';
 
 export const Products: CollectionConfig = {
@@ -13,6 +14,7 @@ export const Products: CollectionConfig = {
 
                         return Boolean(tenant?.stripeDetailsSubmitted);
                 },
+                delete: ({ req }) => isSuperAdmin(req.user),
         },
         admin: {
                 useAsTitle: 'name',
@@ -26,8 +28,7 @@ export const Products: CollectionConfig = {
                 },
                 {
                         name: 'description',
-                        // TODO: CHange to Rich Text
-                        type: 'text',
+                        type: 'richText',
                         required: true,
                 },
                 {
@@ -63,11 +64,45 @@ export const Products: CollectionConfig = {
                 },
                 {
                         name: 'content',
-                        // TODO: CHange to Rich Text
-                        type: 'textarea',
+                        editor: lexicalEditor({
+                                features: ({ defaultFeatures }) => [
+                                        ...defaultFeatures,
+                                        UploadFeature({
+                                                collections: {
+                                                        media: {
+                                                                fields: [
+                                                                        {
+                                                                                name: 'alt',
+                                                                                type: 'text',
+                                                                        },
+                                                                ],
+                                                        },
+                                                },
+                                        }),
+                                ],
+                        }),
+                        type: 'richText',
                         admin: {
                                 description:
                                         'Protected content only visible to customers after purchase. Add product documentation, downloadable files, getting started guides, and bonus materials. Supports Markdown syntax.',
+                        },
+                },
+                {
+                        name: 'isArchived',
+                        label: 'Archived',
+                        type: 'checkbox',
+                        defaultValue: false,
+                        admin: {
+                                description: 'If checked, it will not be visible to customers',
+                        },
+                },
+                {
+                        name: 'isPrivate',
+                        label: 'Private',
+                        type: 'checkbox',
+                        defaultValue: false,
+                        admin: {
+                                description: 'If checked, this product will not be visible on the public store',
                         },
                 },
         ],

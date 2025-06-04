@@ -22,7 +22,7 @@ export const useCart = (tenantSlug: string) => {
 
         const isProductInCart = useCallback(
                 (productId: string) => {
-                        productIds.includes(productId);
+                        return productIds.includes(productId);
                 },
                 [productIds],
         );

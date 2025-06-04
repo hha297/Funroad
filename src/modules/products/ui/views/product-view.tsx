@@ -12,7 +12,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { toast } from 'sonner';
-
+import { RichText } from '@payloadcms/richtext-lexical/react';
 const CartButton = dynamic(() => import('../components/cart-button').then((mod) => mod.CartButton), {
         ssr: false,
         loading: () => (
@@ -101,9 +101,7 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
                                                 </div>
                                                 <div className="p-6">
                                                         {data.description ? (
-                                                                <p className="font-medium text-muted-foreground text-xl">
-                                                                        {data.description}
-                                                                </p>
+                                                                <RichText data={data.description} />
                                                         ) : (
                                                                 <p className="font-medium text-muted-foreground text-xl">
                                                                         No description provided
@@ -198,6 +196,16 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
                                                 </div>
                                         </div>
                                 </div>
+                        </div>
+                </div>
+        );
+};
+
+export const ProductViewSkeleton = () => {
+        return (
+                <div className="px-4 lg:px-12 py-8 flex flex-col gap-4 w-full animate-pulse bg-neutral-200 rounded-lg h-96">
+                        <div className="relative aspect-[3.9] border-b">
+                                <Image src={'/placeholder.png'} alt={'Image'} fill className="object-cover" />
                         </div>
                 </div>
         );
