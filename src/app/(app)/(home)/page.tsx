@@ -1,11 +1,21 @@
-'use client';
+import { DEFAULT_LIMIT } from '@/lib/constants';
 
-import { useTRPC } from '@/trpc/client';
-import { useQuery } from '@tanstack/react-query';
+import { ProductListView } from '@/modules/products/ui/views/product-list-view';
+import { getQueryClient, trpc } from '@/trpc/server';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
-export default function Home() {
-        const trpc = useTRPC();
-        const { data } = useQuery(trpc.auth.session.queryOptions());
+export default async function Home() {
+        const queryClient = getQueryClient();
 
-        return <div className="flex flex-col gap-y-4 px-4">{JSON.stringify(data?.user)}</div>;
+        void queryClient.prefetchInfiniteQuery(
+                trpc.products.getMany.infiniteQueryOptions({
+                        limit: DEFAULT_LIMIT,
+                }),
+        );
+
+        return (
+                <HydrationBoundary state={dehydrate(queryClient)}>
+                        <ProductListView />
+                </HydrationBoundary>
+        );
 }
