@@ -24,7 +24,6 @@ export const TagsFilter = ({ value, onChange }: TagsFilterProps) => {
                         },
                 ),
         );
-        console.log(data);
 
         const onClick = (tag: string) => {
                 if (value?.includes(tag)) {
