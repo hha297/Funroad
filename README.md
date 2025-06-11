@@ -1,6 +1,6 @@
 # Multi-Vendor E-Commerce App
 
-This is a [Next.js](https://nextjs.org) 15 project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app). In this 20‑hour tutorial (split into two parts), you’ll build your own multi‑vendor e-commerce app where creators have their own storefronts, sell digital products, and get paid through Stripe Connect. It’s a solid, practical project that walks you through how modern platforms are made.
+An e-commerce app where creators have their own storefronts, sell digital products, and get paid through Stripe Connect. It’s a solid, practical project that walks you through how modern platforms are made.
 
 ## Key Features
 
